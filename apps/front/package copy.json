@@ -37,6 +37,24 @@
     "build-storybook": "build-storybook -s public",
     "codegen": "graphql-codegen --config codegen.yml"
   },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*",
+          "**/*.tsx"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off",
+          "react-hooks/exhaustive-deps": "off"
+        }
+      }
+    ]
+  },
   "browserslist": {
     "production": [
       ">0.2%",

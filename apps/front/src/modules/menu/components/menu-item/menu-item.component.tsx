@@ -44,7 +44,6 @@ export const MenuItem: FC<MenuItemProps> = ({
     <div className="w-72 lg:w-96 shadow-xl rounded-2xl bg-white flex flex-col">
       <div className="relative">
         <AdvancedImage
-          // @ts-expect-error
           cldImg={imageCld}
           width={384}
           height={240}

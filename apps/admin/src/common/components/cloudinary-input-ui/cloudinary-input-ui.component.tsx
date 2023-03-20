@@ -63,6 +63,7 @@ export const CloudinaryInputUI: FC<CloudinaryInputUIProps> = ({
         <CardHeader title={label} />
         <CardContent>
           {value ? (
+            // @ts-expect-error
             <AdvancedImage cldImg={image} width={384} height={240} />
           ) : (
             <Skeleton variant="rectangular" width={384} height={240} />
