@@ -1,0 +1,27 @@
+query GetCustomerByPhone($phoneNumber: String!) {
+  customers(where: { phone: { _eq: $phoneNumber } }) {
+    id
+    twilioVerificationSid
+  }
+}
+
+mutation RegisterNewCustomer($phone: String!, $twilioVerificationSid: String!) {
+  insert_customers_one(
+    object: { phone: $phone, twilioVerificationSid: $twilioVerificationSid }
+    on_conflict: {
+      constraint: customers_phone_key
+      update_columns: twilioVerificationSid
+    }
+  ) {
+    id
+  }
+}
+
+mutation CreateNewCustomer($phone: String!, $address: String!, $name: String!) {
+  insert_customers_one(
+    object: { phone: $phone, address: $address, name: $name }
+    on_conflict: { constraint: customers_phone_key }
+  ) {
+    id
+  }
+}

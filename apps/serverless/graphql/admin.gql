@@ -1,0 +1,25 @@
+query GetAdminByUsername($username: String!) {
+  admin(where: { username: { _eq: $username } }) {
+    id
+    password
+  }
+}
+
+query GetAdminById($id: uuid!) {
+  admin_by_pk(id: $id) {
+    id
+    username
+  }
+}
+
+query GetAdmins {
+  admin {
+    id
+  }
+}
+
+mutation InsertAdmin($username: String!, $password: String!) {
+  insert_admin_one(object: { username: $username, password: $password }) {
+    id
+  }
+}

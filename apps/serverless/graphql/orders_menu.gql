@@ -1,0 +1,5 @@
+mutation AddItemsToOrder($objects: [orders_menu_insert_input!]!) {
+  insert_orders_menu(objects: $objects) {
+    affected_rows
+  }
+}

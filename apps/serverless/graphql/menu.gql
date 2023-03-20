@@ -1,0 +1,19 @@
+query GetMenuItemsGroupedByCategoryId(
+  $firstCategory: uuid!
+  $secondCategory: uuid!
+) {
+  firstGroup: menu(where: { category_id: { _eq: $firstCategory } }) {
+    id
+  }
+  secondGroup: menu(where: { category_id: { _eq: $secondCategory } }) {
+    id
+  }
+}
+
+query GetMenuItemsById($ids: [uuid!]!) {
+  menu(where: { id: { _in: $ids } }) {
+    id
+    title
+    price
+  }
+}

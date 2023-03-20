@@ -1,0 +1,72 @@
+mutation CreateFakeOrder(
+  $client_address: String!
+  $client_name: String!
+  $client_phone: String!
+  $created_at: timestamptz
+  $comment: String = ""
+  $payment_type: payment_types_enum!
+) {
+  insert_orders_one(
+    object: {
+      client_address: $client_address
+      client_name: $client_name
+      client_phone: $client_phone
+      status: DELIVERED
+      created_at: $created_at
+      comment: $comment
+      payment_type: $payment_type
+    }
+  ) {
+    id
+  }
+}
+
+mutation CreateOrder(
+  $client_address: String!
+  $client_name: String!
+  $client_phone: String!
+  $comment: String = ""
+  $payment_type: payment_types_enum = CASH
+  $payment_status: payment_status_enum = null
+) {
+  insert_orders_one(
+    object: {
+      client_address: $client_address
+      client_name: $client_name
+      client_phone: $client_phone
+      comment: $comment
+      payment_type: $payment_type
+      status: NEW
+      payment_status: $payment_status
+    }
+  ) {
+    id
+  }
+}
+
+mutation UpdateOrderPaymentId($id: uuid!, $payment_id: Int!) {
+  update_orders_by_pk(
+    pk_columns: { id: $id }
+    _set: { payment_id: $payment_id }
+  ) {
+    id
+  }
+}
+
+mutation DeleteOrderById($id: uuid!) {
+  delete_orders_by_pk(id: $id) {
+    id
+  }
+}
+
+mutation UpdateOrderPaymentStatusById(
+  $id: uuid!
+  $payment_status: payment_status_enum!
+) {
+  update_orders_by_pk(
+    pk_columns: { id: $id }
+    _set: { payment_status: $payment_status }
+  ) {
+    id
+  }
+}
