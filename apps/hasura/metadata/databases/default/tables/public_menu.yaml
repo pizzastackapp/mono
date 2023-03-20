@@ -1,0 +1,36 @@
+table:
+  name: menu
+  schema: public
+object_relationships:
+  - name: category
+    using:
+      manual_configuration:
+        column_mapping:
+          category_id: id
+        insertion_order: null
+        remote_table:
+          name: categories
+          schema: public
+select_permissions:
+  - role: guest
+    permission:
+      columns:
+        - category_id
+        - id
+        - image
+        - ingredients
+        - price
+        - title
+        - weight
+      filter: {}
+  - role: user
+    permission:
+      columns:
+        - price
+        - weight
+        - image
+        - ingredients
+        - title
+        - category_id
+        - id
+      filter: {}

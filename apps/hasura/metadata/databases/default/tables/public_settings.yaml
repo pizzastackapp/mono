@@ -1,0 +1,16 @@
+table:
+  name: settings
+  schema: public
+select_permissions:
+  - role: guest
+    permission:
+      columns:
+        - drinks_category
+        - id
+      filter: {}
+  - role: user
+    permission:
+      columns:
+        - drinks_category
+        - id
+      filter: {}

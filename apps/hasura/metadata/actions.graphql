@@ -1,0 +1,100 @@
+type Query {
+  adminGetMe: AdminGetMeOutput
+}
+
+type Query {
+  adminLogin(
+    admin: AdminLoginInput!
+  ): AdminLoginOutput
+}
+
+type Mutation {
+  adminRegister(
+    admin: AdminRegisterInput!
+  ): AdminRegisterOutput
+}
+
+type Query {
+  cloudinarySignature: CloudinarySignatureOutput
+}
+
+type Mutation {
+  createOrder(
+    order: CreateOrderInput!
+  ): CreateOrderOutput
+}
+
+type Query {
+  customerLogin(
+    input: CustomerLoginInput!
+  ): CustomerLoginOutput
+}
+
+type Query {
+  customerVerifyCode(
+    input: CustomerVerifyCodeInput!
+  ): CustomerVerifyCodeOutput
+}
+
+input AdminRegisterInput {
+  username: String!
+  password: String!
+}
+
+input AdminLoginInput {
+  username: String!
+  password: String!
+}
+
+input CustomerLoginInput {
+  phoneNumber: String!
+}
+
+input CustomerVerifyCodeInput {
+  phoneNumber: String!
+  code: String!
+}
+
+input CreateOrderInput {
+  client_address: String!
+  client_name: String!
+  client_phone: String!
+  comment: String
+  payment_type: String
+  items: String!
+}
+
+type AdminRegisterOutput {
+  accessToken: String!
+}
+
+type AdminLoginOutput {
+  accessToken: String!
+}
+
+type AdminGetMeOutput {
+  id: String!
+  username: String!
+}
+
+type CloudinarySignatureOutput {
+  apiKey: String!
+  cloudName: String!
+  signature: String!
+  timestamp: Int!
+  publicId: String!
+}
+
+type CustomerLoginOutput {
+  status: String!
+}
+
+type CustomerVerifyCodeOutput {
+  accessToken: String!
+}
+
+type CreateOrderOutput {
+  id: String!
+  checkout_url: String
+}
+

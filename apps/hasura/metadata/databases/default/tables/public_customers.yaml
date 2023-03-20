@@ -1,0 +1,35 @@
+table:
+  name: customers
+  schema: public
+array_relationships:
+  - name: orders
+    using:
+      manual_configuration:
+        column_mapping:
+          phone: client_phone
+        insertion_order: null
+        remote_table:
+          name: orders
+          schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - address
+        - id
+        - name
+        - phone
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - address
+        - name
+        - phone
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+      check: null

@@ -1,0 +1,75 @@
+table:
+  name: orders
+  schema: public
+object_relationships:
+  - name: customer
+    using:
+      manual_configuration:
+        column_mapping:
+          client_phone: phone
+        insertion_order: null
+        remote_table:
+          name: customers
+          schema: public
+array_relationships:
+  - name: order_items
+    using:
+      manual_configuration:
+        column_mapping:
+          id: order_id
+        insertion_order: null
+        remote_table:
+          name: orders_menu
+          schema: public
+computed_fields:
+  - name: sum
+    definition:
+      function:
+        name: sum_by_order
+        schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - client_address
+        - client_name
+        - client_phone
+        - comment
+        - created_at
+        - id
+        - payment_status
+        - payment_type
+        - status
+      computed_fields:
+        - sum
+      filter:
+        customer:
+          id:
+            _eq: X-Hasura-User-Id
+event_triggers:
+  - name: order_created
+    definition:
+      enable_manual: false
+      insert:
+        columns: '*'
+    retry_conf:
+      interval_sec: 10
+      num_retries: 0
+      timeout_sec: 60
+    webhook_from_env: HASURA_EVENT_WEBHOOK_HANDLER
+    headers:
+      - name: x-pizzastack-secret-key
+        value_from_env: HASURA_PIZZASTACK_SECRET
+  - name: order_updated
+    definition:
+      enable_manual: false
+      update:
+        columns: '*'
+    retry_conf:
+      interval_sec: 10
+      num_retries: 0
+      timeout_sec: 60
+    webhook_from_env: HASURA_EVENT_WEBHOOK_HANDLER
+    headers:
+      - name: x-pizzastack-secret-key
+        value_from_env: HASURA_PIZZASTACK_SECRET

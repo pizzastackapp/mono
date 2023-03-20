@@ -1,0 +1,75 @@
+actions:
+  - name: adminGetMe
+    definition:
+      kind: ""
+      handler: '{{HASURA_ACTIONS_ENDPOINT}}/admin-get-me'
+      forward_client_headers: true
+  - name: adminLogin
+    definition:
+      kind: ""
+      handler: '{{HASURA_ACTIONS_ENDPOINT}}/admin-login'
+    permissions:
+      - role: guest
+    comment: Login admin
+  - name: adminRegister
+    definition:
+      kind: synchronous
+      handler: '{{HASURA_ACTIONS_ENDPOINT}}/admin-register'
+      forward_client_headers: true
+      headers:
+        - name: x-pizzastack-secret-key
+          value_from_env: HASURA_PIZZASTACK_SECRET
+    comment: Admin registration
+  - name: cloudinarySignature
+    definition:
+      kind: ""
+      handler: '{{HASURA_ACTIONS_ENDPOINT}}/cloud-signature'
+      forward_client_headers: true
+  - name: createOrder
+    definition:
+      kind: synchronous
+      handler: '{{HASURA_ACTIONS_ENDPOINT}}/create-order'
+      headers:
+        - name: x-pizzastack-secret-key
+          value_from_env: HASURA_PIZZASTACK_SECRET
+    permissions:
+      - role: user
+      - role: guest
+  - name: customerLogin
+    definition:
+      kind: ""
+      handler: '{{HASURA_ACTIONS_ENDPOINT}}/customer-login'
+      forward_client_headers: true
+      headers:
+        - name: x-pizzastack-secret-key
+          value_from_env: HASURA_PIZZASTACK_SECRET
+    permissions:
+      - role: guest
+    comment: Customer login
+  - name: customerVerifyCode
+    definition:
+      kind: ""
+      handler: '{{HASURA_ACTIONS_ENDPOINT}}/customer-verify-code'
+      headers:
+        - name: x-pizzastack-secret-key
+          value_from_env: HASURA_PIZZASTACK_SECRET
+    permissions:
+      - role: guest
+    comment: Customer verify code
+custom_types:
+  enums: []
+  input_objects:
+    - name: AdminRegisterInput
+    - name: AdminLoginInput
+    - name: CustomerLoginInput
+    - name: CustomerVerifyCodeInput
+    - name: CreateOrderInput
+  objects:
+    - name: AdminRegisterOutput
+    - name: AdminLoginOutput
+    - name: AdminGetMeOutput
+    - name: CloudinarySignatureOutput
+    - name: CustomerLoginOutput
+    - name: CustomerVerifyCodeOutput
+    - name: CreateOrderOutput
+  scalars: []

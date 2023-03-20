@@ -1,0 +1,3 @@
+table:
+  name: last_week_orders
+  schema: public
