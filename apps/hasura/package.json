@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
-    "dev": "hasura console --admin-secret myadminsecretkey --skip-update-check"
+    "dev": "hasura console --admin-secret myadminsecretkey --skip-update-check --no-browser"
   },
   "devDependencies": {
     "hasura-cli": "^2.9.0"
