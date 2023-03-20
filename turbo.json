@@ -11,6 +11,15 @@
     },
     "dev": {
       "cache": false
+    },
+    "ios": {
+      "cache": false
+    },
+    "android": {
+      "cache": false
+    },
+    "ports": {
+      "cache": false
     }
   }
 }

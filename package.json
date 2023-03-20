@@ -11,7 +11,10 @@
     "dev": "yarn docker && turbo run dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "docker": "docker-compose -p pizzastack up --build -d"
+    "docker": "docker-compose -p pizzastack up --build -d",
+    "android": "turbo run android --filter=mobile",
+    "ios": "turbo run ios --filter=mobile",
+    "ports": "turbo run ports --filter=mobile"
   },
   "devDependencies": {
     "eslint-config-custom": "*",
